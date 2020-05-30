@@ -42,6 +42,6 @@ edit Action に割り当てるように設定してください。
 Route::group(['prefix' => 'admin'],function() {
     Route::get('profile/create',
     'Admin\ProfileController@add');
-    Route::get('peofile/edit',
+    Route::get('profile/edit',
     'Admin\ProfileController@edit');
 });
