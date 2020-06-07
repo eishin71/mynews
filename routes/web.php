@@ -41,9 +41,9 @@ edit Action に割り当てるように設定してください。
 //admin/profile/edit にアクセスしたら ProfileController のedit Action
 Route::group(['prefix' => 'admin'],function() {
     Route::get('profile/create',
-    'Admin\ProfileController@add');
+    'Admin\ProfileController@add')->middleware('auth');
     Route::get('profile/edit',
-    'Admin\ProfileController@edit');
+    'Admin\ProfileController@edit')->middleware('auth');
 });
 
 Auth::routes();
