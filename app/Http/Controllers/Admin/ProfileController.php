@@ -53,6 +53,6 @@ class ProfileController extends Controller
         
         $profiles->fill($profiles_form)->save();
         
-        return redirect('admin/profile/edit');
+        return redirect('admin/profile/edit?id='.$request->id);
     }
 }
