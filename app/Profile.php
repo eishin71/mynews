@@ -2,7 +2,7 @@
 
 namespace App;
 use Illuminate\Database\Eloquent\Model;
-class Profiles extends Model
+class Profile extends Model
 {
     protected $guarded = array('id');
     

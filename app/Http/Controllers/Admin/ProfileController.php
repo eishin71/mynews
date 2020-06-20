@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Profiles;
+use App\Profile;
 class ProfileController extends Controller
 {
     public function add()
@@ -12,46 +12,46 @@ class ProfileController extends Controller
     
     public function create(Request $request)
     {
-        $this->validate($request,Profiles::$rules);
-        $profiles = new Profiles;
+        $this->validate($request,Profile::$rules);
+        $profile = new Profile;
         $form = $request->all();
         
         if(isset($form['image'])) {
             $path = $request->file('image')->store('public/image');
-            $profiles->image_path = basename($path);
+            $profile->image_path = basename($path);
         }else {
-            $profiles->image_path = null;
+            $profile->image_path = null;
         }
         unset($form['_token']);
         unset($form['image']);
         
-        $profiles->fill($form);
-        $profiles->save();
+        $profile->fill($form);
+        $profile->save();
         
         return redirect('admin/profile/create');
     }
     
     public function edit(Request $request)
     {
-        $profiles = Profiles::find($request->id);
-        if (empty($profiles)) {
+        $profile = Profile::find($request->id);
+        if (empty($profile)) {
             abort(404);
         }
-        return view('admin.profile.edit',['profiles_form' => $profiles]);
+        return view('admin.profile.edit',['profiles_form' => $profile]);
     }
 
     public function update(Request $request)
     {
-        $this->validate($request,Profiles::$rules);
-        $profiles = Profiles::find($request->id);
-        $profiles_form = $request->all();
-        if (isset($profiles_form['image'])) {
-            $profiles->image_path = null;
-            unset($profiles_form['remove']);
+        $this->validate($request,Profile::$rules);
+        $profile = Profile::find($request->id);
+        $profile_form = $request->all();
+        if (isset($profile_form['image'])) {
+            $profile->image_path = null;
+            unset($profile_form['remove']);
         }
-        unset($profiles_form['_token']);
+        unset($profile_form['_token']);
         
-        $profiles->fill($profiles_form)->save();
+        $profile->fill($profile_form)->save();
         
         return redirect('admin/profile/edit?id='.$request->id);
     }
