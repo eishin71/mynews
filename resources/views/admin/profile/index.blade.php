@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <label class="col-md-2">氏名</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="cond_title" value="{{ $cond_title }}">
+                            <input type="text" class="form-control" name="cond_title" value={{ $cond_title }}>
                         </div>
                         <div class="col-md-2">
                             {{ csrf_field() }}
@@ -38,11 +38,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $news)
+                            @foreach($posts as $profile)
                                 <tr>
                                     <th>{{ $profile->id }}</th>
-                                    <td>{{ \Str::limit($profile->title, 100) }}</td>
-                                    <td>{{ \Str::limit($profile->body, 250) }}</td>
+                                    <td>{{ Str::limit($profile->title, 100) }}</td>
+                                    <td>{{ Str::limit($profile->body, 250) }}</td>
+                                    <td>
                                       <div>
                                           <a href="{{ action('Admin\ProfileController@edit',
                                           ['id' => $profile->$id]) }}">編集</a>
@@ -51,6 +52,7 @@
                                           <a href="{{ action('Admin\ProfileController@delete',
                                           ['id' => $profile->$id]) }}">削除</a>
                                       </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
